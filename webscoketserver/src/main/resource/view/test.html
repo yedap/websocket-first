@@ -40,6 +40,11 @@ function connect() {
 	var url = "/sockjs";
     var socket = new SockJS(url);
     stompClient = Stomp.over(socket);
+    stompClient.heartbeat.outgoing =100000;  // client will send heartbeats every 20000ms
+    stompClient.heartbeat.incoming = 0;      // client does not want to receive heartbeats from the server
+    stompClient.debug = function(str) {
+        $("#debug").append(str + "\n");
+    };    
     stompClient.connect(headers, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
@@ -48,8 +53,7 @@ function connect() {
 
 
 function  subscribe(){
-	stompClient.subscribe('/queue/marco', function (greeting) {
-	    debugger;
+	stompClient.subscribe('/queue/132123122', function (greeting) {
 		showGreeting(greeting.body);
 	});
 }
@@ -69,7 +73,8 @@ function sendName() {
 }
 
 function showGreeting(message) {
-    $("#display").val(message);
+	var orig = $("#display").val();
+    $("#display").val(orig+"\n"+message);
 }
 
 $(function () {
@@ -93,14 +98,14 @@ $(function () {
     <div>
     	<form action="#">
     	 原文：<textarea id="source" rows="25" cols="25"></textarea>
+    	  接收：<textarea id="display" rows="25" cols="25"></textarea>
+    	 debug：<textarea id="debug" rows="25" cols="25"></textarea>
+    	</form>
 	    <ui>
-<!-- 	    <li><button id="connect" style="color: red" >连接</button></li> -->
 	    <li><button id="disconnect" style="color: red" >断开连接</button></li>
 	    <li><button id="send" style="color: red" >发送</button></li>
 	    <li><button id="subscribe" style="color: red" >订阅</button></li>
 	    </ui>
-    	 显示：<textarea id="display" rows="25" cols="25"></textarea>
-    	</form>
     </div>
 </center>
 
