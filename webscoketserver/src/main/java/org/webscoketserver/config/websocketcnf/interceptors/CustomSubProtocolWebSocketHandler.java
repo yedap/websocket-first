@@ -26,7 +26,8 @@ public class CustomSubProtocolWebSocketHandler extends SubProtocolWebSocketHandl
 		
 		
 		List<String> os = session.getHandshakeHeaders().get("cookie");
-		os.get(0);
+		String s  = os.get(0);
+		System.out.println(s);
 		System.out.println(session.getAttributes().toString());
 		webSocketSessionContainer.registere(session.getId(), session);
 		// TODO Auto-generated method stub
