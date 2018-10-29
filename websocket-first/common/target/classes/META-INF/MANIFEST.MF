@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Built-By: dell
-Build-Jdk: 11.0.1
-Implementation-Title: common
-Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: com.yesummer
-Implementation-URL: http://maven.apache.org
-Created-By: Maven Integration for Eclipse
-
