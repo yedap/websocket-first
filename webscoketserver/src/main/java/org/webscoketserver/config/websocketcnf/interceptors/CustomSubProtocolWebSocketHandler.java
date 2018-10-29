@@ -23,8 +23,6 @@ public class CustomSubProtocolWebSocketHandler extends SubProtocolWebSocketHandl
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		
-		
 		List<String> os = session.getHandshakeHeaders().get("cookie");
 		String s  = os.get(0);
 		System.out.println(s);
